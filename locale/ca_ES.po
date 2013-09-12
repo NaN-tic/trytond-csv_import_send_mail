@@ -1,0 +1,15 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:electronic.mail.template,csv_import:"
+msgid "Allow CSV imports"
+msgstr "Premetre importacions CSV"
+
+msgctxt "help:electronic.mail.template,csv_import:"
+msgid ""
+"Check this box to allow send emails from csv_import module for each record "
+"imported."
+msgstr ""
+"Marqueu aquesta casella si voleu permetre enviar correus electrònics des del"
+" mòdul csv_import per a cada registre importat."
