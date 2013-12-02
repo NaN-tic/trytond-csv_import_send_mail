@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- This file is part of csv_import_send_mail module for Tryton.
+The COPYRIGHT file at the top level of this repository contains the full
+copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="csv_profile_form_view">
+            <field name="model">csv.profile</field>
+            <field name="inherit" ref="csv_import.csv_profile_form_view"/>
+            <field name="name">csv_profile_form</field>
+        </record>
+    </data>
+</tryton>
+    
