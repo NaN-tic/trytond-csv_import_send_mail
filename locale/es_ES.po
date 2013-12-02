@@ -2,14 +2,26 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "field:electronic.mail.template,csv_import:"
-msgid "Allow CSV imports"
-msgstr "Permitir importaciones CSV"
+msgctxt "error:csv.archive:"
+msgid "CSV Import %s successfully"
+msgstr "Importación CSV %s"
 
-msgctxt "help:electronic.mail.template,csv_import:"
-msgid ""
-"Check this box to allow send emails from csv_import module for each record "
-"imported."
-msgstr ""
-"Marque esta casilla para permitir enviar correos electrónicos desde el "
-"módulo csv_import para cada registro importado."
+msgctxt "error:csv.archive:"
+msgid "CSV Import records: %s"
+msgstr "Importación de CSV: %s"
+
+msgctxt "field:csv.profile,email_group:"
+msgid "Email Group"
+msgstr "Grupo email"
+
+msgctxt "field:csv.profile,email_template:"
+msgid "Email Template"
+msgstr "Plantilla Email"
+
+msgctxt "field:csv.profile,send_email_group:"
+msgid "Send Email Group"
+msgstr "Enviar correo al grupo"
+
+msgctxt "field:csv.profile,send_email_template:"
+msgid "Send Email Template"
+msgstr "Enviar correo a plantilla"
