@@ -1,17 +1,15 @@
-======================================================
-Envio correo electrónico durante la importación de CSV
-======================================================
+=======================================================
+CSV Import. Envío de correo al finalizar la importación
+=======================================================
 
-Envia correo electrónico desde plantilla cuando se importa desde ficheros CSV.
+Envia correo electrónico a los usuarios del sistema y/o a una plantilla después
+de haber importado los datos.
 
-Configuración
-=============
+En el perfil de CSV marque las opciones:
 
-* Configure una cuenta de correo electrónico de salida SMTP a través del menú
-  Administración/SMTP tal y como se indica para el módulo Envío de correo.
+- Enviar grupo. Selecciona el grupo de usuarios que enviará el correo.
+Se enviará un correo a todos los usuarios del grupo que tengan un correo en su
+usuario.
 
-* Cree una plantilla de correo electrónico a través del menú Emails/Template
-  (tal y como se indica para el módulo Plantillas de correo electrónico), relacionada
-  con la clase de registros que desee importar. En la pestaña "Informes" añada
-  un informe si lo desea. Finalmente, en la pestaña "Avanzado" marque la casilla
-  "Permitir importación CSV".
+- Enviar plantila. Selecciona una plantilla. Se procesará la plantilla y se
+enviará (electronic mail template).
