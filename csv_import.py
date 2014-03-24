@@ -85,9 +85,9 @@ class CSVArchive:
             for record in records:
                 rec = pool.get(profile.model.model)(record)
                 email_message = Template.render(template, rec)
-                email = Email.create_from_email(
+                electronic_email = Email.create_from_email(
                     email_message, template.mailbox.id)
                 Template.send_email(email, template)
-                Template.add_event(template, rec, email, email_message)
+                Template.add_event(template, rec, electronic_email, email_message)
 
         super(CSVArchive, cls).post_import(profile, records)
