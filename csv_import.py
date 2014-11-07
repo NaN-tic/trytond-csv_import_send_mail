@@ -4,7 +4,7 @@
 from trytond.pool import Pool, PoolMeta
 from trytond.model import fields
 from trytond.pyson import Eval
-from trytond.config import CONFIG
+from trytond.config import config
 from trytond.tools import get_smtp_server
 from email.mime.text import MIMEText
 from email.header import Header
@@ -53,7 +53,7 @@ class CSVArchive:
             body = cls.raise_user_error('request_body',
                 ', '.join(map(str, records)), raise_exception=False)
 
-            from_addr = CONFIG.get('smtp_default_from_email')
+            from_addr = config.get('smtp_default_from_email')
             users = User.search([
                 ('groups', 'in', [profile.email_group.id]),
                 ('active', '=', True),

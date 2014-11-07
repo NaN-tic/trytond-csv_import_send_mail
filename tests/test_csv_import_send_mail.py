@@ -7,30 +7,20 @@ import sys
 import trytond.tests.test_tryton
 import unittest
 
-DIR = os.path.abspath(os.path.normpath(os.path.join(__file__,
-    '..', '..', '..', '..', '..', 'trytond')))
-if os.path.isdir(DIR):
-    sys.path.insert(0, os.path.dirname(DIR))
 
 
 class CSVImportSendMailTestCase(unittest.TestCase):
-    '''
-    Test CSV Import Send Mail module.
-    '''
+    'Test CSV Import Send Mail module'
 
     def setUp(self):
         trytond.tests.test_tryton.install_module('csv_import_send_mail')
 
     def test0005views(self):
-        '''
-        Test views.
-        '''
+        'Test views'
         test_view('csv_import_send_mail')
 
     def test0006depends(self):
-        '''
-        Test depends.
-        '''
+        'Test depends'
         test_depends()
 
 
