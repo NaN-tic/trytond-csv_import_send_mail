@@ -53,7 +53,7 @@ class CSVArchive:
             body = cls.raise_user_error('request_body',
                 ', '.join(map(str, records)), raise_exception=False)
 
-            from_addr = config.get('smtp_default_from_email')
+            from_addr = config.get('email', 'from')
             users = User.search([
                 ('groups', 'in', [profile.email_group.id]),
                 ('active', '=', True),
