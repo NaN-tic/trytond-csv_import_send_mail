@@ -88,6 +88,6 @@ class CSVArchive:
                 electronic_email = Email.create_from_email(
                     email_message, template.mailbox.id)
                 electronic_email.send_email(template.draft_mailbox)
-                Template.add_event(template, rec, electronic_email, email_message)
+                template.add_event(rec, electronic_email)
 
         super(CSVArchive, cls).post_import(profile, records)
