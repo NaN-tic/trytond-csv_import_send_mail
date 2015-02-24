@@ -91,7 +91,9 @@ class CSVArchive:
                 email_message = Template.render(template, rec)
                 electronic_email = Email.create_from_email(
                     email_message, mailbox.id)
-                electronic_email.send_email(draft_mailbox)
+                success = electronic_email.send_email()
+                if not success:
+                    electronic_email.mailbox = draft_mailbox
                 template.add_event(rec, electronic_email)
 
         super(CSVArchive, cls).post_import(profile, records)
