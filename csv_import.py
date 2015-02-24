@@ -43,6 +43,7 @@ class CSVArchive:
     @classmethod
     def post_import(cls, profile, records):
         pool = Pool()
+        EmailConfiguration = pool.get('electronic.mail.configuration')
 
         #send email all users in profile group
         if profile.send_email_group:
@@ -80,14 +81,17 @@ class CSVArchive:
         if profile.send_email_template and profile.email_template:
             Email = pool.get('electronic.mail')
             Template = pool.get('electronic.mail.template')
+            email_configuration = EmailConfiguration(1)
+            mailbox = email_configuration.outbox
+            draft_mailbox = email_configuration.draft
             template = profile.email_template
 
             for record in records:
                 rec = pool.get(profile.model.model)(record)
                 email_message = Template.render(template, rec)
                 electronic_email = Email.create_from_email(
-                    email_message, template.mailbox.id)
-                electronic_email.send_email(template.draft_mailbox)
+                    email_message, mailbox.id)
+                electronic_email.send_email(draft_mailbox)
                 template.add_event(rec, electronic_email)
 
         super(CSVArchive, cls).post_import(profile, records)
