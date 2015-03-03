@@ -82,18 +82,34 @@ class CSVArchive:
             Email = pool.get('electronic.mail')
             Template = pool.get('electronic.mail.template')
             email_configuration = EmailConfiguration(1)
-            mailbox = email_configuration.outbox
             draft_mailbox = email_configuration.draft
             template = profile.email_template
 
+            if template.queue:
+                mailbox = template.mailbox_outbox \
+                    if template.mailbox_outbox else email_configuration.outbox
+            else:
+                mailbox = template.mailbox if template.mailbox \
+                    else email_configuration.sent
+            mailbox = email_configuration.outbox
+
+            electronic_emails = set()
             for record in records:
                 rec = pool.get(profile.model.model)(record)
                 email_message = Template.render(template, rec)
                 electronic_email = Email.create_from_email(
-                    email_message, mailbox.id)
-                success = electronic_email.send_email()
-                if not success:
-                    electronic_email.mailbox = draft_mailbox
+                    email_message, mailbox)
                 template.add_event(rec, electronic_email)
+                electronic_emails.add(electronic_email)
+
+            if not template.queue:
+                for electronic_mail in electronic_emails:
+                    success = electronic_email.send_email()
+                    if success:
+                        logging.getLogger('Mail').info('Send email: %s' %
+                            (electronic_email.rec_name))
+                    else:
+                        electronic_email.mailbox = draft_mailbox
+                        electronic_email.save()
 
         super(CSVArchive, cls).post_import(profile, records)
