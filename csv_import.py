@@ -96,7 +96,7 @@ class CSVArchive:
             electronic_emails = set()
             for record in records:
                 rec = pool.get(profile.model.model)(record)
-                email_message = Template.render(template, rec)
+                email_message = template.render(rec)
                 electronic_email = Email.create_from_email(
                     email_message, mailbox)
                 template.add_event(rec, electronic_email)
