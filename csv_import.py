@@ -8,11 +8,12 @@ from trytond.config import config
 from trytond.tools import get_smtp_server
 from email.mime.text import MIMEText
 from email.header import Header
-
 import logging
 
 __all__ = ['CSVProfile', 'CSVArchive']
 __metaclass__ = PoolMeta
+
+logger = logging.getLogger(__name__)
 
 
 class CSVProfile:
@@ -73,7 +74,6 @@ class CSVArchive:
                     server.sendmail(from_addr, to_addr, msg.as_string())
                     server.quit()
                 except Exception, exception:
-                    logger = logging.getLogger(__name__)
                     logger.error('Unable to deliver email (%s):\n %s'
                         % (exception, msg.as_string()))
 
@@ -106,7 +106,7 @@ class CSVArchive:
                 for electronic_mail in electronic_emails:
                     success = electronic_email.send_email()
                     if success:
-                        logging.getLogger('Mail').info('Send email: %s' %
+                        logger.info('Send email: %s' %
                             (electronic_email.rec_name))
                     else:
                         electronic_email.mailbox = draft_mailbox
