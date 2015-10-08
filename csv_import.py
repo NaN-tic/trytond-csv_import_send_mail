@@ -78,6 +78,7 @@ class CSVArchive:
                         % (exception, msg.as_string()))
 
         #render and send email from electronic mail template
+        activities = []
         if profile.send_email_template and profile.email_template:
             Email = pool.get('electronic.mail')
             Template = pool.get('electronic.mail.template')
@@ -99,8 +100,16 @@ class CSVArchive:
                 email_message = template.render(rec)
                 electronic_email = Email.create_from_email(
                     email_message, mailbox)
-                template.add_event(rec, electronic_email)
                 electronic_emails.add(electronic_email)
+
+                activities.append({
+                    'record': record,
+                    'template': template,
+                    'mail': electronic_email,
+                    })
+
+            if activities:
+                Template.add_activities(activities)
 
             if not template.queue:
                 for electronic_mail in electronic_emails:
