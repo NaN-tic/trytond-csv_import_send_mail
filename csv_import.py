@@ -11,12 +11,12 @@ from email.header import Header
 import logging
 
 __all__ = ['CSVProfile', 'CSVArchive']
-__metaclass__ = PoolMeta
 
 logger = logging.getLogger(__name__)
 
 
 class CSVProfile:
+    __metaclass__ = PoolMeta
     __name__ = 'csv.profile'
     send_email_group = fields.Boolean('Send Email Group')
     email_group = fields.Many2One('res.group', 'Email Group',
@@ -31,6 +31,7 @@ class CSVProfile:
 
 
 class CSVArchive:
+    __metaclass__ = PoolMeta
     __name__ = 'csv.archive'
 
     @classmethod
