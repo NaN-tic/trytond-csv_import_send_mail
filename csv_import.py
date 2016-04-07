@@ -5,7 +5,7 @@ from trytond.pool import Pool, PoolMeta
 from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.config import config
-from trytond.tools import get_smtp_server
+from trytond.sendmail import sendmail
 from email.mime.text import MIMEText
 from email.header import Header
 import logging
@@ -70,13 +70,7 @@ class CSVArchive:
                 msg['From'] = from_addr
                 msg['Subject'] = Header(subject, 'utf-8')
 
-                try:
-                    server = get_smtp_server()
-                    server.sendmail(from_addr, to_addr, msg.as_string())
-                    server.quit()
-                except Exception, exception:
-                    logger.error('Unable to deliver email (%s):\n %s'
-                        % (exception, msg.as_string()))
+                sendmail(from_addr, to_addr, msg)
 
         #render and send email from electronic mail template
         activities = []
